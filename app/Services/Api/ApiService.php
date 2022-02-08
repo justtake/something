@@ -24,7 +24,7 @@ class ApiService
      *
      * @return Collection|null
      */
-    protected function get(string $url): ?Collection
+    public function get(string $url): ?Collection
     {
         return $this->request('GET', $url);
     }
@@ -37,7 +37,7 @@ class ApiService
      *
      * @return Collection|null
      */
-    protected function request(
+    public function request(
         string $method,
         string $url,
         array $params = [],

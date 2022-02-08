@@ -68,6 +68,8 @@ class SwapiSavePeopleCommand extends Command
             }
         } catch (Exception $e) {
             Log::error($e->getMessage());
+            $this->error('failed.');
+            return 0;
         }
 
         $this->newLine();
