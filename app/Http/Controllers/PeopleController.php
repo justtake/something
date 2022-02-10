@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Person;
 use App\Interfaces\PersonRepositoryInterface;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\MessageBag;
 
 class PeopleController extends Controller
 {
@@ -21,12 +24,20 @@ class PeopleController extends Controller
         $this->personRepository = $personRepository;
     }
 
+    /**
+     * @return mixed
+     */
     public function create()
     {
         return view('people.create');
     }
 
-    public function store(Request $request)
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function store(Request $request): RedirectResponse
     {
         $data = $request->only(array_keys(Person::$rules));
         $validator = Validator::make($data, Person::$rules);
@@ -37,7 +48,9 @@ class PeopleController extends Controller
                 ->withInput();
         }
 
-        if (! $this->personRepository->createPerson($data)) {
+        try {
+            $this->personRepository->createPerson($data);
+        } catch (Exception $e) {
             return redirect()->route('people.create')
                 ->with('failed', 'Person not created successfully. Try again later.')
                 ->withInput();
