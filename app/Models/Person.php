@@ -24,4 +24,15 @@ class Person extends Model
         'birth_year',
         'gender'
     ];
+
+    public static $rules = [
+        'name' => 'required',
+        'height' => 'required|integer',
+        'mass' => 'required|integer',
+        'hair_color' => 'required',
+        'skin_color' => 'required',
+        'eye_color' => 'required',
+        'birth_year' => 'required',
+        'gender' => 'required'
+    ];
 }
