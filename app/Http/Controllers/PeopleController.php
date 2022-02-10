@@ -27,6 +27,16 @@ class PeopleController extends Controller
     /**
      * @return mixed
      */
+    public function index()
+    {
+        $people = $this->personRepository->getAllPeople();
+
+        return view('people.index', compact('people'));
+    }
+
+    /**
+     * @return mixed
+     */
     public function create()
     {
         return view('people.create');
@@ -58,6 +68,6 @@ class PeopleController extends Controller
 
         session()->flash('success', 'Person created successfully.');
 
-        return redirect()->route('people.create');
+        return redirect()->route('people');
     }
 }

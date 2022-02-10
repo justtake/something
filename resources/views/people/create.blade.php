@@ -21,7 +21,7 @@
 
     @include('elements.alerts', ['errors' => $errors])
 
-    <h5 class="mb-4">Create new person</h5>
+    <h5 class="mb-4">Create new person <small><a href="{!! route('people') !!}">Show all people</a></small></h5>
     <form action="{!! route('people.store') !!}" method="POST">
         @csrf
 
