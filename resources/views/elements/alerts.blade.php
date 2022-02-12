@@ -1,8 +1,15 @@
 @php
+    $superAdmin = $superAdmin ?? request('superadmin');
     $failed = session('failed');
     $errors = $errors ?? session('errors');
     $success = session('success');
 @endphp
+
+@if ($superAdmin)
+    <div class="alert alert-info" role="alert">
+        I Am Super Admin!
+    </div>
+@endif
 
 @if ($failed)
     <div class="alert alert-danger" role="alert">

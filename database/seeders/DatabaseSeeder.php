@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +17,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        User::factory(1)->create([
+            'email' => 'admin@example.com',
+            'password' => Hash::make('admin123')
+        ]);
+
+        User::factory(1)->create([
+            'email' => 'admin2@example.com',
+            'password' => Hash::make('admin123')
+        ]);
     }
 }
